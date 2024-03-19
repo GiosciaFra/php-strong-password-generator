@@ -1,4 +1,14 @@
-<?php include './functions.php' ?>
+<?php
+ include './functions.php' ;
+ 
+ if (isset($_GET['generate_password'])) {
+    $password = generate_password();
+    session_start();
+    $_SESSION['generated_password'] = $password;
+    header('Location: show_password.php');
+    exit();
+}
+ ?>
 
 
 <!DOCTYPE html>
@@ -6,7 +16,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>php-strong-password-generator </title>
+    <title>Genera Password</title>
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 </head>
@@ -16,16 +26,14 @@
 
 
 
-<div class="container d-flex flex-column align-items-center  ">
+<div class="container-fluid d-flex flex-column align-items-center  ">
         <h1 class="mt-5">Generatore di Password "Sicure"</h1>
         <div class="row mt-3">
             <div class="col">
                 <form method="GET">
                     <button type="submit" name="generate_password" class="btn btn-primary">Genera Password</button>
                 </form>
-                <?php if (($password)): ?>
-                    <div class="mt-3 d-flex flex-column align-items-center "><strong>Password generata:</strong> <?php echo $password; ?></div>
-                <?php endif; ?>
+                
                 
             </div>
         </div>
